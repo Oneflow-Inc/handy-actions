@@ -30,5 +30,5 @@ jobs:
         docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
         curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o ossutil64
         chmod 755 ossutil64
-        ./ossutil64 config -e ${{ github.event.inputs.ossEndpoint }} -i ${{ github.event.inputs.accessKeyID }} -k ${{ github.event.inputs.accessKeySecret }}  -L EN -c ./ossconfig
+        ./ossutil64 config -e ${{ github.event.inputs.ossEndpoint }} -i ${{ github.event.inputs.accessKeyID }} -k ${{ github.event.inputs.accessKeySecret }}  -L EN -c $HOME/.ossutilconfig
         ./ossutil64 --update cp ${gz_file} ${{ github.event.inputs.ossPath }}/${gz_file}
