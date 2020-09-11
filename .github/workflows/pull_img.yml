@@ -21,6 +21,7 @@ jobs:
   downloadDockerImg:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - env:
         IMG_NAME: ${{ github.event.inputs.img }}
       run: |
