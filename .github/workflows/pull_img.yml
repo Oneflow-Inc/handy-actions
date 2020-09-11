@@ -23,7 +23,8 @@ jobs:
     steps:
     - run: |
       docker pull ${{ github.event.inputs.img }}
-      export gz_file="$(python3 sanitize_filename.py --img_name ${{ github.event.inputs.img }}).tar.gz"
+      img_name=${{ github.event.inputs.img }}
+      export gz_file="$(python3 sanitize_filename.py --img_name ${img_name}).tar.gz"
       python3 -m pip install pathvalidate
       docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
       curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o ossutil64
