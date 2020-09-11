@@ -8,4 +8,6 @@ parser.add_argument(
 )
 args = parser.parse_args()
 assert args.img_name
-print(sanitize_filename(args.img_name))
+sanitized = sanitize_filename(args.img_name)
+assert sanitize
+print()
