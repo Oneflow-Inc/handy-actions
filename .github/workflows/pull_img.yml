@@ -21,9 +21,10 @@ jobs:
   downloadDockerImg:
     runs-on: ubuntu-latest
     steps:
-    - run: |
+    - env:
+        img_name: ${{ github.event.inputs.img }}
+      run: |
       docker pull ${{ github.event.inputs.img }}
-      img_name=${{ github.event.inputs.img }}
       export gz_file="$(python3 sanitize_filename.py --img_name ${img_name}).tar.gz"
       python3 -m pip install pathvalidate
       docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
