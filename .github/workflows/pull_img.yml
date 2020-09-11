@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - env:
-      IMG_NAME: ${{ github.event.inputs.img }}
+        IMG_NAME: ${{ github.event.inputs.img }}
       run: |
         docker pull ${{ github.event.inputs.img }}
         export gz_file=`python3 sanitize_filename.py`.tar.gz
