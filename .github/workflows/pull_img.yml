@@ -6,6 +6,10 @@ on:
       img:
         description: 'image to download, for instance, tensorflow/tensorflow'
         required: true
+      compress:
+        description: 'whether to compress the docker image, VM for github action has 14GB limit, if the image is too big, it is advised not to compress. set to 0 to skip compression'
+        default: "1"
+        required: true
       accessKeyID:
         required: true
       accessKeySecret:
@@ -24,13 +28,21 @@ jobs:
     - uses: actions/checkout@v2
     - env:
         IMG_NAME: ${{ github.event.inputs.img }}
+        COMPRESS: ${{ github.event.inputs.compress }}
       run: |
         set -ex
         docker pull ${{ github.event.inputs.img }}
         python3 -m pip install pathvalidate
-        export gz_file=$(python3 sanitize_filename.py).tar.gz
-        docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
+        export tar_file=$(python3 sanitize_filename.py).tar
+        export gz_file=${tar_file}.gz
+        if [ "${COMPRESS}" = "1" ]; then
+          export file=${gz_file}
+          docker save ${{ github.event.inputs.img }} | gzip > ${file}
+        else
+          export file=${tar_file}
+          docker save ${{ github.event.inputs.img }} -o ${file}
+        fi
         curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o ossutil64
         chmod 755 ossutil64
         ./ossutil64 config -e ${{ github.event.inputs.ossEndpoint }} -i ${{ github.event.inputs.accessKeyID }} -k ${{ github.event.inputs.accessKeySecret }}  -L EN -c $HOME/.ossutilconfig
-        ./ossutil64 --update cp ${gz_file} ${{ github.event.inputs.ossPath }}/${gz_file}
+        ./ossutil64 --update cp ${file} ${{ github.event.inputs.ossPath }}/${file}
