@@ -30,7 +30,6 @@ jobs:
         IMG_NAME: ${{ github.event.inputs.img }}
         COMPRESS: ${{ github.event.inputs.compress }}
       run: |
-        set -ex
         docker pull ${{ github.event.inputs.img }}
         python3 -m pip install pathvalidate
         export tar_file=$(python3 sanitize_filename.py).tar
