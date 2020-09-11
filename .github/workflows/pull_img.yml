@@ -1,4 +1,4 @@
-name: Dowload docker img and upload to Alicloud
+name: Dowload docker img and upload to Aliyun
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
     steps:
     - run: |
       docker pull ${{ github.event.inputs.img }}
-      gz_file="$(python3 sanitize_filename.py --img_name ${{ github.event.inputs.img }}).tar.gz"
+      export gz_file="$(python3 sanitize_filename.py --img_name ${{ github.event.inputs.img }}).tar.gz"
       python3 -m pip install pathvalidate
       docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
       curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o ossutil64
