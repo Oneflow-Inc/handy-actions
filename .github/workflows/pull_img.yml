@@ -27,7 +27,7 @@ jobs:
         set -ex
         docker pull ${{ github.event.inputs.img }}
         python3 -m pip install pathvalidate
-        export gz_file=`python3 sanitize_filename.py`.tar.gz
+        export gz_file=$(python3 sanitize_filename.py).tar.gz
         docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
         curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o ossutil64
         chmod 755 ossutil64
