@@ -40,7 +40,7 @@ jobs:
           docker save ${{ github.event.inputs.img }} | gzip > ${file}
         else
           export file=${tar_file}
-          docker run -it --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://{{ github.event.inputs.img }} docker-archive:./${file}:{{ github.event.inputs.img }}
+          docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://{{ github.event.inputs.img }} docker-archive:./${file}:{{ github.event.inputs.img }}
         fi
         echo "to upload: ${file}"
         curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o ossutil64
