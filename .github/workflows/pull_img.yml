@@ -36,7 +36,8 @@ jobs:
       run: |
         set -x
         python3 -m pip install pathvalidate
-        export tar_file=$(python3 sanitize_filename.py).tar
+        export sanitized_file=$(python3 sanitize_filename.py)
+        export tar_file=${sanitized_file}.tar
         export gz_file=${tar_file}.gz
         curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o ossutil64
         chmod 755 ossutil64
@@ -44,11 +45,9 @@ jobs:
 
         if [ "${COMPRESS}" = "1" ]; then
           docker pull ${{ github.event.inputs.img }}
-          export file=${gz_file}
-          docker save ${{ github.event.inputs.img }} | gzip > ${file}
-          ./ossutil64 --update cp ${file} ${{ github.event.inputs.ossPath }}/${file}
+          docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
+          ./ossutil64 --update cp ${gz_file} ${{ github.event.inputs.ossPath }}/${gz_file}
         else
-          export file=${tar_file}
-          docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://${{ github.event.inputs.img }} dir:${file}
-          ./ossutil64 --update cp --recursive ${file} ${{ github.event.inputs.ossPath }}/${file}
+          docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://${{ github.event.inputs.img }} dir:${sanitized_file}
+          ./ossutil64 --update cp --recursive ${sanitized_file} ${{ github.event.inputs.ossPath }}/${sanitized_file}
         fi
