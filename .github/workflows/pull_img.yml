@@ -34,6 +34,7 @@ jobs:
         IMG_NAME: ${{ github.event.inputs.img }}
         COMPRESS: ${{ github.event.inputs.compress }}
       run: |
+        echo ${GITHUB_RUN_ID}
         set -x
         python3 -m pip install pathvalidate
         export sanitized_file=$(python3 sanitize_filename.py)
