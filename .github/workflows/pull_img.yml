@@ -42,8 +42,8 @@ jobs:
         if [ "${COMPRESS}" = "1" ]; then
           docker pull ${{ github.event.inputs.img }}
           docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
-          ./ossutil64 --update cp ${gz_file} ${{ github.event.inputs.ossPath }}/${gz_file}
+          $HOME/ossutil64 --update cp ${gz_file} ${{ github.event.inputs.ossPath }}/${gz_file}
         else
           docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://${{ github.event.inputs.img }} dir:${sanitized_file}
-          ./ossutil64 --update cp --recursive ${sanitized_file} ${{ github.event.inputs.ossPath }}/${sanitized_file}
+          $HOME/ossutil64 --update cp --recursive ${sanitized_file} ${{ github.event.inputs.ossPath }}/${sanitized_file}
         fi
