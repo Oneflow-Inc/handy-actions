@@ -9,7 +9,7 @@ var ossStream = require('aliyun-oss-upload-stream')(new ALY.OSS({
 
 var upload = ossStream.upload({
   Bucket: 'oneflow-static',
-  Key: process.env.OSS_ACCESS_KEY_KEY
+  Key: process.env.OSS_OBJECT_KEY
 });
 
 // 可选配置
