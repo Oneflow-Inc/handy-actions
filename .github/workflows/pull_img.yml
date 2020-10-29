@@ -36,7 +36,7 @@ jobs:
         chmod 755 $HOME/ossutil64
         $HOME/ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
 
-        npm install -g aliyun-oss-upload-stream
+        sudo npm install -g aliyun-oss-upload-stream
         export OSS_ACCESS_KEY_KEY=img/${gz_file}
         docker pull ${{ github.event.inputs.img }}
         docker save ${{ github.event.inputs.img }} | gzip | node stream_oss.js
