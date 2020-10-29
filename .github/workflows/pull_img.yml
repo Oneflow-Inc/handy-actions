@@ -9,7 +9,7 @@ on:
     inputs:
       img:
         description: 'image to download, for instance, tensorflow/tensorflow'
-        default: "busybox"
+        required: true
       compress:
         description: 'whether to compress the docker image, VM for github action has 14GB limit, if the image is too big, it is advised not to compress. set to 0 to skip compression'
         default: "1"
@@ -35,7 +35,7 @@ jobs:
         curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o $HOME/ossutil64
         chmod 755 $HOME/ossutil64
         $HOME/ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
-
+        IMG_NAME=${IMG_NAME:-"busybox"}
         sudo npm install -g aliyun-oss-upload-stream
         export OSS_ACCESS_KEY_KEY=img/${gz_file}
         docker pull ${{ github.event.inputs.img }}
