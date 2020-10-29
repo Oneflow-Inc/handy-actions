@@ -32,9 +32,6 @@ jobs:
         export sanitized_file=$(python3 sanitize_filename.py)
         export tar_file=${sanitized_file}.tar
         export gz_file=${tar_file}.gz
-        curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o $HOME/ossutil64
-        chmod 755 $HOME/ossutil64
-        $HOME/ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
         IMG_NAME=${IMG_NAME:-"busybox"}
         sudo npm install -g aliyun-oss-upload-stream
         export OSS_ACCESS_KEY_KEY=img/${gz_file}
