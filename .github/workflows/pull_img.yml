@@ -38,5 +38,5 @@ jobs:
         IMG_NAME=${IMG_NAME:-"busybox"}
         sudo npm install -g aliyun-oss-upload-stream
         export OSS_ACCESS_KEY_KEY=img/${gz_file}
-        docker pull ${{ github.event.inputs.img }}
-        docker save ${{ github.event.inputs.img }} | gzip | node stream_oss.js
+        docker pull ${IMG_NAME}
+        docker save ${IMG_NAME} | gzip | node stream_oss.js
