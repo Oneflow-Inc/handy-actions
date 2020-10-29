@@ -5,6 +5,7 @@ var ossStream = require('aliyun-oss-upload-stream')(new ALY.OSS({
   accessKeyId: process.env.OSS_ACCESS_KEY_ID,
   secretAccessKey: process.env.OSS_ACCESS_KEY_SECRET,
   endpoint: 'http://oss-cn-beijing.aliyuncs.com',
+  apiVersion: '2013-10-15'
 }));
 
 var upload = ossStream.upload({
