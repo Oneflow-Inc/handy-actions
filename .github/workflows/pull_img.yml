@@ -33,7 +33,7 @@ jobs:
         export tar_file=${sanitized_file}.tar
         export gz_file=${tar_file}.gz
         IMG_NAME=${IMG_NAME:-"busybox"}
-        sudo npm install aliyun-oss-upload-stream aliyun-sdk
+        npm install aliyun-oss-upload-stream aliyun-sdk
         export OSS_OBJECT_KEY=img/${gz_file}
         docker pull ${IMG_NAME}
         docker save ${IMG_NAME} | gzip | node stream_oss.js
