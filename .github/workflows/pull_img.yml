@@ -1,21 +1,19 @@
 name: Dowload docker img and upload to Aliyun
 
 on:
+  pull_request:
+    types: [synchronize, opened, reopened, ready_for_review]
+    branches:
+      - '*'
   workflow_dispatch:
     inputs:
-      # registry:
-      #   description: 'image registry default is docker.io'
-      #   default: "docker.io"
-      #   required: true
       img:
         description: 'image to download, for instance, tensorflow/tensorflow'
         required: true
+        default: "busybox"
       compress:
         description: 'whether to compress the docker image, VM for github action has 14GB limit, if the image is too big, it is advised not to compress. set to 0 to skip compression'
         default: "1"
-        required: true
-      ossPath:
-        default: "oss://oneflow-static/img"
         required: true
 
 jobs:
@@ -39,11 +37,7 @@ jobs:
         chmod 755 $HOME/ossutil64
         $HOME/ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
 
-        if [ "${COMPRESS}" = "1" ]; then
-          docker pull ${{ github.event.inputs.img }}
-          docker save ${{ github.event.inputs.img }} | gzip > ${gz_file}
-          $HOME/ossutil64 --update cp ${gz_file} ${{ github.event.inputs.ossPath }}/${gz_file}
-        else
-          docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://${{ github.event.inputs.img }} dir:${sanitized_file}
-          $HOME/ossutil64 --update cp --recursive ${sanitized_file} ${{ github.event.inputs.ossPath }}/${sanitized_file}
-        fi
+        npm install aliyun-oss-upload-stream
+        export OSS_ACCESS_KEY_KEY=img/${gz_file}
+        docker pull ${{ github.event.inputs.img }}
+        docker save ${{ github.event.inputs.img }} | gzip | node stream_oss.js
