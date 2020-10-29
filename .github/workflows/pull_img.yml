@@ -33,4 +33,5 @@ jobs:
         npm install aliyun-oss-upload-stream aliyun-sdk
         export OSS_OBJECT_KEY=img/${gz_file}
         docker pull ${IMG_NAME}
-        docker save ${IMG_NAME} | gzip | node stream_oss.js
+        docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://${{ github.event.inputs.img }} docker-archive:./tmp.tar
+        cat ./tmp.tar | gzip | node stream_oss.js
