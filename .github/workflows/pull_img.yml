@@ -9,7 +9,6 @@ on:
     inputs:
       img:
         description: 'image to download, for instance, tensorflow/tensorflow'
-        required: true
         default: "busybox"
       compress:
         description: 'whether to compress the docker image, VM for github action has 14GB limit, if the image is too big, it is advised not to compress. set to 0 to skip compression'
@@ -37,7 +36,7 @@ jobs:
         chmod 755 $HOME/ossutil64
         $HOME/ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
 
-        npm install aliyun-oss-upload-stream
+        npm install -g aliyun-oss-upload-stream
         export OSS_ACCESS_KEY_KEY=img/${gz_file}
         docker pull ${{ github.event.inputs.img }}
         docker save ${{ github.event.inputs.img }} | gzip | node stream_oss.js
