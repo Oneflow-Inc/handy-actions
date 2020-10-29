@@ -25,6 +25,7 @@ jobs:
         IMG_NAME=${IMG_NAME:-"busybox"}
         echo "GITHUB_RUN_ID:${GITHUB_RUN_ID}"
         set -x
+        set -o pipefail
         python3 -m pip install pathvalidate
         export sanitized_file=$(python3 sanitize_filename.py)
         export tar_file=${sanitized_file}.tar
