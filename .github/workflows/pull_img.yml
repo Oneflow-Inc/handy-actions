@@ -26,13 +26,13 @@ jobs:
         OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
         OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
       run: |
+        IMG_NAME=${IMG_NAME:-"busybox"}
         echo "GITHUB_RUN_ID:${GITHUB_RUN_ID}"
         set -x
         python3 -m pip install pathvalidate
         export sanitized_file=$(python3 sanitize_filename.py)
         export tar_file=${sanitized_file}.tar
         export gz_file=${tar_file}.gz
-        IMG_NAME=${IMG_NAME:-"busybox"}
         npm install aliyun-oss-upload-stream aliyun-sdk
         export OSS_OBJECT_KEY=img/${gz_file}
         docker pull ${IMG_NAME}
