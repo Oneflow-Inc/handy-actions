@@ -11,10 +11,16 @@ if __name__ == "__main__":
         "--ossutil_bin", required=False, help="docker img name", default="ossutil64",
     )
     args = parser.parse_args()
+    ossutil_bin = args.ossutil_bin
     oss_url = args.oss_url
-    basename = os.path.basename(args.oss_url)
+    if oss_url.endswith("/"):
+        oss_url = oss_url[0:-1]
+    basename = os.path.basename(oss_url)
+    assert basename
     dl_cmd = f"""set -x
-{ossutil_bin} cp -r {oss_url} {basename}
+chmod +x {ossutil_bin}
+{ossutil_bin} config -e oss-cn-beijing.aliyuncs.com -i "$OSS_ACCESS_KEY_ID" -k "$OSS_ACCESS_KEY_SECRET"  -L EN -c $HOME/.ossutilconfig
+{ossutil_bin} cp -r {oss_url} .
 {ossutil_bin} cp {oss_url}.tag {basename}.tag
 docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy dir:./{basename}  docker-archive:./{basename}.tar
 """
