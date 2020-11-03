@@ -26,11 +26,17 @@ docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy dir:./{basename}  docke
 """
     subprocess.check_call(dl_cmd, shell=True)
     # Loaded image ID: sha256:f0b02e9d092d905d0d87a8455a1ae3e9bb47b4aa3dc125125ca5cd10d6441c9f
-    loaded_output = subprocess.check_output("docker load -i {basename}.tar", shell=True)
+    load_cmd = f"docker load -i {basename}.tar"
+    print(load_cmd)
+    loaded_output = subprocess.check_output(load_cmd, shell=True)
+    loaded_output = loaded_output.decode('ascii').strip()
+    print(loaded_output)
     sha256 = loaded_output.split(":")[-1]
     tag = None
-    with open("{basename}.tag") as f:
+    with open(f"{basename}.tag") as f:
         tag = f.read()
+    tag = tag.strip()
     assert tag
     tag_cmd = f"docker tag {sha256} {tag}"
+    print(tag_cmd)
     subprocess.check_call(tag_cmd, shell=True)
