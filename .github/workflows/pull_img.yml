@@ -10,7 +10,13 @@ on:
       img:
         description: 'image to download, for instance, tensorflow/tensorflow'
         required: true
-
+      compress:
+        description: 'whether to compress the docker image, VM for github action has 14GB limit, if the image is too big, it is advised not to compress. set to 0 to skip compression'
+        default: "1"
+        required: false
+      ossPath:
+        default: "oss://oneflow-static/img"
+        required: false
 jobs:
   downloadDockerImg:
     runs-on: ubuntu-latest
@@ -23,6 +29,7 @@ jobs:
         OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
       run: |
         IMG_NAME=${IMG_NAME:-"busybox"}
+        COMPRESS=${COMPRESS:-"1"}
         echo "GITHUB_RUN_ID:${GITHUB_RUN_ID}"
         set -x
         set -o pipefail
@@ -30,7 +37,19 @@ jobs:
         export sanitized_file=$(python3 sanitize_filename.py)
         export tar_file=${sanitized_file}.tar
         export gz_file=${tar_file}.gz
-        npm install aliyun-oss-upload-stream aliyun-sdk
-        export OSS_OBJECT_KEY=img/${gz_file}
-        docker pull ${IMG_NAME}
-        docker save ${IMG_NAME} | gzip | node stream_oss.js
+        if [ "${COMPRESS}" = "1" ]; then
+          npm install aliyun-oss-upload-stream aliyun-sdk
+          export OSS_OBJECT_KEY=img/${gz_file}
+          docker pull ${IMG_NAME}
+          docker save ${IMG_NAME} | gzip | node stream_oss.js
+        else
+          docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://${IMG_NAME} dir:${sanitized_file}
+          echo "${IMG_NAME}" > ${sanitized_file}.tag
+
+          curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o $HOME/ossutil64
+          chmod 755 $HOME/ossutil64
+          $HOME/ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
+
+          $HOME/ossutil64 --update cp --recursive ${sanitized_file} ${{ github.event.inputs.ossPath }}/${sanitized_file}
+          $HOME/ossutil64 --update cp ${sanitized_file}.tag ${{ github.event.inputs.ossPath }}/${sanitized_file}.tag
+        fi
