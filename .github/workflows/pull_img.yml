@@ -29,6 +29,7 @@ jobs:
         OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
       run: |
         IMG_NAME=${IMG_NAME:-"busybox"}
+        IMG_NAME=${COMPRESS:-"1"}
         echo "GITHUB_RUN_ID:${GITHUB_RUN_ID}"
         set -x
         set -o pipefail
