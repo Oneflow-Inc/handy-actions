@@ -16,7 +16,7 @@ on:
         required: true
       ossPath:
         default: "oss://oneflow-static/img"
-        required: true
+        required: false
 jobs:
   downloadDockerImg:
     runs-on: ubuntu-latest
