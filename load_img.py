@@ -19,7 +19,7 @@ if __name__ == "__main__":
     assert basename
     dl_cmd = f"""set -x
 chmod +x {ossutil_bin}
-{ossutil_bin} config -e oss-cn-beijing.aliyuncs.com -i "$OSS_ACCESS_KEY_ID" -k "$OSS_ACCESS_KEY_SECRET"  -L EN -c $HOME/.ossutilconfig
+# {ossutil_bin} config -e oss-cn-beijing.aliyuncs.com -i "$OSS_ACCESS_KEY_ID" -k "$OSS_ACCESS_KEY_SECRET"  -L EN -c $HOME/.ossutilconfig
 {ossutil_bin} cp -r {oss_url} .
 {ossutil_bin} cp {oss_url}.tag {basename}.tag
 docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy dir:./{basename}  docker-archive:./{basename}.tar
