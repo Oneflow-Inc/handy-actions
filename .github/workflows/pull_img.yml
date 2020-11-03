@@ -36,10 +36,9 @@ jobs:
         export sanitized_file=$(python3 sanitize_filename.py)
         export tar_file=${sanitized_file}.tar
         export gz_file=${tar_file}.gz
-        npm install aliyun-oss-upload-stream aliyun-sdk
-        export OSS_OBJECT_KEY=img/${gz_file}
-        docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://${IMG_NAME} docker-archive:./tmp.tar
         if [ "${COMPRESS}" = "1" ]; then
+          npm install aliyun-oss-upload-stream aliyun-sdk
+          export OSS_OBJECT_KEY=img/${gz_file}
           docker pull ${IMG_NAME}
           docker save ${IMG_NAME} | gzip | node stream_oss.js
         else
