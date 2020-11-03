@@ -13,7 +13,7 @@ on:
       compress:
         description: 'whether to compress the docker image, VM for github action has 14GB limit, if the image is too big, it is advised not to compress. set to 0 to skip compression'
         default: "1"
-        required: true
+        required: false
       ossPath:
         default: "oss://oneflow-static/img"
         required: false
