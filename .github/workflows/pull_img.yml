@@ -28,11 +28,13 @@ jobs:
     - env:
         IMG_NAME: ${{ github.event.inputs.img }}
         COMPRESS: ${{ github.event.inputs.compress }}
+        OSSPATH: ${{ github.event.inputs.ossPath }}
         OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
         OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
       run: |
         IMG_NAME=${IMG_NAME:-"busybox"}
         COMPRESS=${COMPRESS:-"1"}
+        OSSPATH=${OSSPATH:-"oss://oneflow-static/img"}
         echo "GITHUB_RUN_ID:${GITHUB_RUN_ID}"
         set -x
         set -o pipefail
