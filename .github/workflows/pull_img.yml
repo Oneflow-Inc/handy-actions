@@ -46,11 +46,9 @@ jobs:
         $HOME/ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
 
         if [ "${COMPRESS}" = "1" ]; then
-          npm install aliyun-oss-upload-stream aliyun-sdk
-          export OSS_OBJECT_KEY=img/${gz_file}
           docker pull ${IMG_NAME}
           docker save ${IMG_NAME} | gzip > ${gz_file}
-          $HOME/ossutil64 --update cp ${gz_file} ${{ github.event.inputs.ossPath }}img/${gz_file}
+          $HOME/ossutil64 --update cp ${gz_file} ${{ github.event.inputs.ossPath }}/${gz_file}
         else
           docker run --rm -v $PWD:$PWD -w $PWD ananace/skopeo copy docker://${IMG_NAME} dir:${sanitized_file}
           echo "${IMG_NAME}" > ${sanitized_file}.tag
