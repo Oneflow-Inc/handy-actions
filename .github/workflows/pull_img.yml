@@ -22,7 +22,7 @@ on:
         required: false
 jobs:
   downloadDockerImg:
-    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.requested_reviewers.*.name, 'oneflow-bot') }}
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.requested_reviewers, 'oneflow-bot') }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
