@@ -22,6 +22,7 @@ on:
         required: false
 jobs:
   downloadDockerImg:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'need_ci') }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
