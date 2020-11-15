@@ -22,7 +22,7 @@ on:
         required: false
 jobs:
   downloadDockerImg:
-    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.requested_reviewers, 'oneflow-bot') }}
+    if: ${{ github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -33,6 +33,7 @@ jobs:
         OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
         OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
       run: |
+        echo '${{ toJson(github.event.pull_request.requested_reviewers) }}'
         IMG_NAME=${IMG_NAME:-"busybox"}
         COMPRESS=${COMPRESS:-"1"}
         OSSPATH=${OSSPATH:-"oss://oneflow-static/img"}
