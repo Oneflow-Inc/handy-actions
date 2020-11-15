@@ -32,8 +32,9 @@ jobs:
         OSSPATH: ${{ github.event.inputs.ossPath }}
         OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
         OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        requested_reviewers: ${{ toJson(github.event.pull_request.requested_reviewers) }}
       run: |
-        echo '${{ toJson(github.event.pull_request.requested_reviewers) }}'
+        echo ${requested_reviewers}
         IMG_NAME=${IMG_NAME:-"busybox"}
         COMPRESS=${COMPRESS:-"1"}
         OSSPATH=${OSSPATH:-"oss://oneflow-static/img"}
