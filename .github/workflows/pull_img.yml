@@ -5,7 +5,7 @@ on:
     branches:
       - master
   pull_request:
-    types: [synchronize, opened, reopened, ready_for_review]
+    types: [review_requested]
     branches:
       - '*'
   workflow_dispatch:
@@ -22,6 +22,7 @@ on:
         required: false
 jobs:
   downloadDockerImg:
+    if: ${{ github.event_name == 'pull_request' }} && contains(github.event.pull_request.requested_reviewers.*.login, 'oneflow-ci-bot')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -31,7 +32,9 @@ jobs:
         OSSPATH: ${{ github.event.inputs.ossPath }}
         OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
         OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        requested_reviewers: ${{ toJson(github.event.pull_request.requested_reviewers) }}
       run: |
+        echo ${requested_reviewers}
         IMG_NAME=${IMG_NAME:-"busybox"}
         COMPRESS=${COMPRESS:-"1"}
         OSSPATH=${OSSPATH:-"oss://oneflow-static/img"}
