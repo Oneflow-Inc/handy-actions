@@ -20,6 +20,12 @@ jobs:
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
         run: |
           set -x
+          mkdir -p $HOME/bin
+          curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o $HOME/bin/ossutil64
+          chmod 755 $HOME/bin/ossutil64
+          export PATH=$PATH:$HOME/bin
+          ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
+
           wget ${{ github.event.inputs.url }}
           filename=$(basename "${{ github.event.inputs.url }}")
-          $HOME/ossutil64 --update cp ${filename} ${{ github.event.inputs.ossPath }}/${filename}
+          ossutil64 --update cp ${filename} ${{ github.event.inputs.ossPath }}/${filename}
