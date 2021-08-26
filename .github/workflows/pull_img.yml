@@ -36,3 +36,21 @@ jobs:
           echo ${{ contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
           echo ${{ !contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
           echo "${{ join(github.event.pull_request.labels.*.name, ', ') }}"
+  test-job:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [10, 12, 14]
+        steps:
+          - uses: actions/checkout@v2
+          - env:
+              IMG_NAME: ${{ github.event.inputs.img }}
+              COMPRESS: ${{ github.event.inputs.compress }}
+              OSSPATH: ${{ github.event.inputs.ossPath }}
+              OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+              OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+            run: |
+              echo ${{ contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
+              echo ${{ !contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
+              echo "${{ join(github.event.pull_request.labels.*.name, ', ') }}"
+    steps: ${{ matrix.steps }}
