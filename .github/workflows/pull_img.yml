@@ -34,6 +34,7 @@ jobs:
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
         run: |
           echo ${{ contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
+          echo ${{ !contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
           IMG_NAME=${IMG_NAME:-"busybox"}
           COMPRESS=${COMPRESS:-"1"}
           OSSPATH=${OSSPATH:-"oss://oneflow-static/img"}
