@@ -1,4 +1,4 @@
-name: Dowload docker img and upload to Aliyun
+name: Dowload anything
 
 on:
   workflow_dispatch:
