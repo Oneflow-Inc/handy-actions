@@ -35,6 +35,7 @@ jobs:
         run: |
           echo ${{ contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
           echo ${{ !contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
+          echo ${{ toJSON(github.event.pull_request.labels.*.name) }}
           IMG_NAME=${IMG_NAME:-"busybox"}
           COMPRESS=${COMPRESS:-"1"}
           OSSPATH=${OSSPATH:-"oss://oneflow-static/img"}
