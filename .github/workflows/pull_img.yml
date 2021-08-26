@@ -35,4 +35,4 @@ jobs:
         run: |
           echo ${{ contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
           echo ${{ !contains(github.event.pull_request.labels.*.name, 'need-single-client-tests') }}
-          echo ${{ toJSON(github.event.pull_request.labels.*.name) }}
+          echo "${{ join(github.event.pull_request.labels.*.name, ', ') }}"
