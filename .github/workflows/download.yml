@@ -1,0 +1,25 @@
+name: Dowload docker img and upload to Aliyun
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "url to download"
+        required: true
+      ossPath:
+        default: "oss://oneflow-static/downloads"
+        required: false
+        description: "path to put file"
+jobs:
+  downloadDockerImg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - env:
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        run: |
+          set -x
+          wget ${{ github.event.inputs.url }}
+          filename=$(basename "${{ github.event.inputs.url }}")
+          $HOME/ossutil64 --update cp ${filename} ${{ github.event.inputs.ossPath }}/${filename}
