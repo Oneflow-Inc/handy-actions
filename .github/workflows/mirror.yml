@@ -1,5 +1,4 @@
-name: Dowload anything
-
+name: Third-party mirror
 on:
   workflow_dispatch:
     inputs:
