@@ -21,7 +21,7 @@ jobs:
           chmod 755 $HOME/bin/ossutil64
           export PATH=$PATH:$HOME/bin
           ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
-          [[ "${{ github.event.inputs.ossPath }}" =~ ^https:// ]] || { echo "url must starts with 'https://'"; exit 1; }
+          [[ "${{ github.event.inputs.url }}" =~ "^https://" ]] || { echo "url must starts with 'https://'"; exit 1; }
           URL="${{ github.event.inputs.url }}"
           URL_NOPRO=${URL:7}
           URL_REL=${URL_NOPRO#*/}
