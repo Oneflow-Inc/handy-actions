@@ -7,7 +7,7 @@ on:
         description: "url to download"
         required: true
       ossPath:
-        default: "oss://oneflow-static/downloads"
+        default: "oss://oneflow-static/third_party_mirror/https"
         required: false
         description: "path to put file"
 jobs:
