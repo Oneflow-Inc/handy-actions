@@ -29,5 +29,6 @@ jobs:
           PATH_NAME="${URL_REL%%\?*}"
           wget ${{ github.event.inputs.url }}
           filename=$(basename "${{ github.event.inputs.url }}")
-          md5sum ${filename}
+          md5=$(md5sum "$filename" | awk '{print $1}')
+          echo "::warning file=${filename},line=0,col=0,endColumn=0::${md5}"
           ossutil64 --update cp ${filename} ${{ env.OSS_PATH_PREFIX }}/${PATH_NAME}
