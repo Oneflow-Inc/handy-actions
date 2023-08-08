@@ -28,4 +28,4 @@ jobs:
 
           wget ${{ github.event.inputs.url }}
           filename=$(basename "${{ github.event.inputs.url }}")
-          ossutil64 --update cp ${filename} ${{ github.event.inputs.ossPath }}/${filename}
+          ossutil64 --update cp "${filename}" "${{ github.event.inputs.ossPath }}/${filename}"
