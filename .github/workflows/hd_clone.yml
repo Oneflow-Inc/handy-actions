@@ -49,6 +49,4 @@ jobs:
           export PATH=$PATH:$HOME/bin
           ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
 
-          wget ${{ github.event.inputs.url }}
-          filename=$(basename "${{ github.event.inputs.url }}")
-          ossutil64 --update cp ${filename} ${{ github.event.inputs.ossPath }}/${filename}
+          ossutil64 sync model_downloaded ${{ github.event.inputs.ossPath }}/stable-diffusion-v1-5
