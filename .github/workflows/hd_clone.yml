@@ -33,11 +33,9 @@ jobs:
           remove-codeql: "true"
           remove-docker-images: "true"
           overprovision-lvm: "true"
-      - uses: actions/checkout@v2
-        with:
-          lfs: true
-          repository: https://huggingface.co/runwayml/stable-diffusion-v1-5
-          path: model_downloaded
+      - run: |
+          git lfs install
+          git clone https://huggingface.co/runwayml/stable-diffusion-v1-5
       - env:
           OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
           OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
