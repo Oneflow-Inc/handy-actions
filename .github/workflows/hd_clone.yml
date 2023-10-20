@@ -44,7 +44,18 @@ jobs:
           export PATH=$PATH:$HOME/bin
           ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
 
-          ossutil64 cp https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/safety_checker/model.fp16.safetensors oss://oneflow-static/hf_hub/stable-diffusion-v1-5/safety_checker/model.fp16.safetensors
-          ossutil64 cp https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/text_encoder/model.fp16.safetensors oss://oneflow-static/hf_hub/stable-diffusion-v1-5/text_encoder/model.fp16.safetensors
-          ossutil64 cp https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/unet/diffusion_pytorch_model.fp16.safetensors oss://oneflow-static/hf_hub/stable-diffusion-v1-5/unet/diffusion_pytorch_model.fp16.safetensors
-          ossutil64 cp https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/vae/diffusion_pytorch_model.fp16.safetensors oss://oneflow-static/hf_hub/stable-diffusion-v1-5/vae/diffusion_pytorch_model.fp16.safetensors
+          wget https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/safety_checker/model.fp16.safetensors
+          ossutil64 cp model.fp16.safetensors oss://oneflow-static/hf_hub/stable-diffusion-v1-5/safety_checker/model.fp16.safetensors
+          rm model.fp16.safetensors
+
+          wget https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/text_encoder/model.fp16.safetensors
+          ossutil64 cp model.fp16.safetensors oss://oneflow-static/hf_hub/stable-diffusion-v1-5/text_encoder/model.fp16.safetensors
+          rm model.fp16.safetensors
+
+          wget https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/unet/diffusion_pytorch_model.fp16.safetensors
+          ossutil64 cp diffusion_pytorch_model.fp16.safetensors oss://oneflow-static/hf_hub/stable-diffusion-v1-5/unet/diffusion_pytorch_model.fp16.safetensors
+          rm diffusion_pytorch_model.fp16.safetensors
+
+          wget https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/vae/diffusion_pytorch_model.fp16.safetensors
+          ossutil64 cp diffusion_pytorch_model.fp16.safetensors oss://oneflow-static/hf_hub/stable-diffusion-v1-5/vae/diffusion_pytorch_model.fp16.safetensors
+          rm diffusion_pytorch_model.fp16.safetensors
