@@ -1,0 +1,49 @@
+name: HF clone
+
+on:
+  push:
+    branches:
+      - "clone-model"
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "url to download"
+        required: true
+      ossPath:
+        default: "oss://oneflow-static/hf_hub"
+        required: false
+        description: "path to put file"
+jobs:
+  clone_model:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
+          overprovision-lvm: "true"
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+          repository: https://huggingface.co/runwayml/stable-diffusion-v1-5
+          path: model_downloaded
+      - env:
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        run: |
+          set -x
+          mkdir -p $HOME/bin
+          curl http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64 -o $HOME/bin/ossutil64
+          chmod 755 $HOME/bin/ossutil64
+          export PATH=$PATH:$HOME/bin
+          ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
+
+          wget ${{ github.event.inputs.url }}
+          filename=$(basename "${{ github.event.inputs.url }}")
+          ossutil64 --update cp ${filename} ${{ github.event.inputs.ossPath }}/${filename}
