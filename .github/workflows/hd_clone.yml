@@ -13,6 +13,11 @@ on:
         default: "oss://oneflow-static/hf_hub"
         required: false
         description: "path to put file"
+
+concurrency:
+  group: clone-hub-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   clone_model:
     runs-on: ubuntu-latest
