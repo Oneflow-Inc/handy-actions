@@ -94,4 +94,3 @@ jobs:
 
           wget --quiet ${{ matrix.task.src_url }} -O tmpf
           ossutil64 cp -f tmpf ${{ matrix.task.dst_oss_url }}
-          rm model.fp16.safetensors
