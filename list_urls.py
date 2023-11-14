@@ -35,5 +35,5 @@ for file_path in tracked_files:
         # file_name = os.path.basename(file_path)
         # print(f"ossutil64 cp -f {file_name} {aliyun_base_url}/{file_path}")
         # print(f"rm {file_name}")
-        item = f"src_url: {from_path}, dst_oss_url: {aliyun_base_url}/{file_path}"
+        item = f"src_url: '{from_path}', dst_oss_url: '{aliyun_base_url}/{file_path}'"
         print("- {" + item + "}")
