@@ -20,6 +20,7 @@ concurrency:
 
 jobs:
   clone_model:
+    name: ${{ matrix.task.src_url }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
