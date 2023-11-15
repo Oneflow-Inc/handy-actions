@@ -27,11 +27,11 @@ jobs:
       matrix:
         task:
           - {
-              src_url: "https://huggingface.co/latent-consistency/lcm-lora-sdxl/LCM-LoRA-Technical-Report.pdf",
+              src_url: "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/main/LCM-LoRA-Technical-Report.pdf",
               dst_oss_url: "oss://oneflow-static/hf_hub/lcm-lora-sdxl/LCM-LoRA-Technical-Report.pdf",
             }
           - {
-              src_url: "https://huggingface.co/latent-consistency/lcm-lora-sdxl/pytorch_lora_weights.safetensors",
+              src_url: "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/main/pytorch_lora_weights.safetensors",
               dst_oss_url: "oss://oneflow-static/hf_hub/lcm-lora-sdxl/pytorch_lora_weights.safetensors",
             }
     steps:
