@@ -12,6 +12,10 @@ repo = Repo(repo_path)
 dl_base_url = "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/"
 aliyun_base_url = "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7"
 
+repo_path = "/Users/tsai/Downloads/lcm-lora-sdxl"
+repo = Repo(repo_path)
+dl_base_url = "https://huggingface.co/latent-consistency/lcm-lora-sdxl"
+aliyun_base_url = "oss://oneflow-static/hf_hub/lcm-lora-sdxl"
 
 # Get the list of all tracked files
 tracked_files = repo.git.ls_files().split("\n")

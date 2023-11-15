@@ -27,48 +27,12 @@ jobs:
       matrix:
         task:
           - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/LCM_Dreamshaper_v7_4k.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/LCM_Dreamshaper_v7_4k.safetensors",
+              src_url: "https://huggingface.co/latent-consistency/lcm-lora-sdxl/LCM-LoRA-Technical-Report.pdf",
+              dst_oss_url: "oss://oneflow-static/hf_hub/lcm-lora-sdxl/LCM-LoRA-Technical-Report.pdf",
             }
           - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/safety_checker/model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/safety_checker/model.safetensors",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/teaser.png",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/teaser.png",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/text_encoder/model.onnx",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/text_encoder/model.onnx",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/text_encoder/model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/text_encoder/model.safetensors",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/unet/diffusion_pytorch_model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/unet/diffusion_pytorch_model.safetensors",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/unet/model.onnx",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/unet/model.onnx",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/unet/model.onnx_data",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/unet/model.onnx_data",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/vae/diffusion_pytorch_model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/vae/diffusion_pytorch_model.safetensors",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/vae_decoder/model.onnx",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/vae_decoder/model.onnx",
-            }
-          - {
-              src_url: "https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7/resolve/main/vae_encoder/model.onnx",
-              dst_oss_url: "oss://oneflow-static/hf_hub/LCM_Dreamshaper_v7/vae_encoder/model.onnx",
+              src_url: "https://huggingface.co/latent-consistency/lcm-lora-sdxl/pytorch_lora_weights.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/lcm-lora-sdxl/pytorch_lora_weights.safetensors",
             }
     steps:
       - name: Maximize build space
