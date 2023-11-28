@@ -27,12 +27,16 @@ jobs:
       matrix:
         task:
           - {
-              src_url: "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/main/LCM-LoRA-Technical-Report.pdf",
-              dst_oss_url: "oss://oneflow-static/hf_hub/lcm-lora-sdxl/LCM-LoRA-Technical-Report.pdf",
+              src_url: "https://huggingface.co/lllyasviel/sd-controlnet-canny/resolve/main/diffusion_pytorch_model.bin",
+              dst_oss_url: "oss://oneflow-static/hf_hub/sd-controlnet-canny/diffusion_pytorch_model.bin",
             }
           - {
-              src_url: "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/main/pytorch_lora_weights.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/lcm-lora-sdxl/pytorch_lora_weights.safetensors",
+              src_url: "https://huggingface.co/lllyasviel/sd-controlnet-canny/resolve/main/diffusion_pytorch_model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/sd-controlnet-canny/diffusion_pytorch_model.safetensors",
+            }
+          - {
+              src_url: "https://huggingface.co/lllyasviel/sd-controlnet-canny/resolve/main/images/bird.png",
+              dst_oss_url: "oss://oneflow-static/hf_hub/sd-controlnet-canny/images/bird.png",
             }
     steps:
       - name: Maximize build space

@@ -17,6 +17,11 @@ repo = Repo(repo_path)
 dl_base_url = "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/main/"
 aliyun_base_url = "oss://oneflow-static/hf_hub/lcm-lora-sdxl"
 
+repo_path = "/Users/tsai/Downloads/sd-controlnet-canny"
+repo = Repo(repo_path)
+dl_base_url = "https://huggingface.co/lllyasviel/sd-controlnet-canny/resolve/main/"
+aliyun_base_url = "oss://oneflow-static/hf_hub/sd-controlnet-canny"
+
 # Get the list of all tracked files
 tracked_files = repo.git.ls_files().split("\n")
 
