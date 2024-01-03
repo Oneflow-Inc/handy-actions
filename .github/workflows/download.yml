@@ -38,6 +38,6 @@ jobs:
               filename="${filename_input}"
               echo "setting filename: ${filename}"
           fi
-          wget ${{ inputs.url }} -O ${filename}
+          wget "${{ inputs.url }}" -O "${filename}"
 
           ossutil64 --update cp "${filename}" "${{ inputs.ossPath }}/${filename}"
