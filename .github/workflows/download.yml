@@ -30,14 +30,14 @@ jobs:
           export PATH=$PATH:$HOME/bin
           ossutil64 config -e oss-cn-beijing.aliyuncs.com -i ${OSS_ACCESS_KEY_ID} -k ${OSS_ACCESS_KEY_SECRET}  -L EN -c $HOME/.ossutilconfig
 
-          filename=$(basename "${{ github.event.inputs.url }}")
-          filename_input=${{ github.event.inputs.filename }}
+          filename=$(basename "${{ inputs.url }}")
+          filename_input=${{ inputs.filename }}
           if [[ -z "$filename_input" ]]; then
               echo "using filename from url: ${filename}"
           else
               filename="${filename_input}"
               echo "setting filename: ${filename}"
           fi
-          wget ${{ github.event.inputs.url }} -O ${filename}
+          wget ${{ inputs.url }} -O ${filename}
 
-          ossutil64 --update cp "${filename}" "${{ github.event.inputs.ossPath }}/${filename}"
+          ossutil64 --update cp "${filename}" "${{ inputs.ossPath }}/${filename}"
