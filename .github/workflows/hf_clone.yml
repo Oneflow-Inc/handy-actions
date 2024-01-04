@@ -27,40 +27,40 @@ jobs:
       matrix:
         task:
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/juggernautXL_version6Rundiffusion.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/juggernautXL_version6Rundiffusion.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/juggernautXL_version6Rundiffusion.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/juggernautXL_version6Rundiffusion.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/text_encoder/model.fp16.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/text_encoder/model.fp16.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/text_encoder/model.fp16.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/text_encoder/model.fp16.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/text_encoder/model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/text_encoder/model.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/text_encoder/model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/text_encoder/model.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/text_encoder_2/model.fp16.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/text_encoder_2/model.fp16.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/text_encoder_2/model.fp16.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/text_encoder_2/model.fp16.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/text_encoder_2/model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/text_encoder_2/model.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/text_encoder_2/model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/text_encoder_2/model.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/unet/diffusion_pytorch_model.fp16.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/unet/diffusion_pytorch_model.fp16.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/unet/diffusion_pytorch_model.fp16.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/unet/diffusion_pytorch_model.fp16.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/unet/diffusion_pytorch_model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/unet/diffusion_pytorch_model.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/unet/diffusion_pytorch_model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/unet/diffusion_pytorch_model.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/vae/diffusion_pytorch_model.fp16.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/vae/diffusion_pytorch_model.fp16.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/vae/diffusion_pytorch_model.fp16.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/vae/diffusion_pytorch_model.fp16.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/{repo}/resolve/main/vae/diffusion_pytorch_model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/vae/diffusion_pytorch_model.safetensors",
+              src_url: "https://huggingface.co/frankjoshua/juggernautXL_version6Rundiffusion/resolve/main/vae/diffusion_pytorch_model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/juggernautXL_version6Rundiffusion/vae/diffusion_pytorch_model.safetensors",
             }
     steps:
       - name: Maximize build space
