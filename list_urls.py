@@ -23,11 +23,11 @@ dl_base_url = "https://huggingface.co/lllyasviel/sd-controlnet-canny/resolve/mai
 aliyun_base_url = "oss://oneflow-static/hf_hub/sd-controlnet-canny"
 
 model = "juggernautXL_version6Rundiffusion"
-repo = "frankjoshua/juggernautXL_version6Rundiffusion"
+repo_name = "frankjoshua/juggernautXL_version6Rundiffusion"
 repo_path = f"/Users/tsai/Downloads/{model}"
 repo = Repo(repo_path)
-dl_base_url = f"https://huggingface.co/{repo}/resolve/main/"
-aliyun_base_url = "oss://oneflow-static/hf_hub/{model}"
+dl_base_url = f"https://huggingface.co/{repo_name}/resolve/main/"
+aliyun_base_url = f"oss://oneflow-static/hf_hub/{model}"
 
 # Get the list of all tracked files
 tracked_files = repo.git.ls_files().split("\n")
