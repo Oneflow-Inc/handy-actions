@@ -27,16 +27,40 @@ jobs:
       matrix:
         task:
           - {
-              src_url: "https://huggingface.co/lllyasviel/sd-controlnet-canny/resolve/main/diffusion_pytorch_model.bin",
-              dst_oss_url: "oss://oneflow-static/hf_hub/sd-controlnet-canny/diffusion_pytorch_model.bin",
+              src_url: "https://huggingface.co/{repo}/resolve/main/juggernautXL_version6Rundiffusion.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/juggernautXL_version6Rundiffusion.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/lllyasviel/sd-controlnet-canny/resolve/main/diffusion_pytorch_model.safetensors",
-              dst_oss_url: "oss://oneflow-static/hf_hub/sd-controlnet-canny/diffusion_pytorch_model.safetensors",
+              src_url: "https://huggingface.co/{repo}/resolve/main/text_encoder/model.fp16.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/text_encoder/model.fp16.safetensors",
             }
           - {
-              src_url: "https://huggingface.co/lllyasviel/sd-controlnet-canny/resolve/main/images/bird.png",
-              dst_oss_url: "oss://oneflow-static/hf_hub/sd-controlnet-canny/images/bird.png",
+              src_url: "https://huggingface.co/{repo}/resolve/main/text_encoder/model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/text_encoder/model.safetensors",
+            }
+          - {
+              src_url: "https://huggingface.co/{repo}/resolve/main/text_encoder_2/model.fp16.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/text_encoder_2/model.fp16.safetensors",
+            }
+          - {
+              src_url: "https://huggingface.co/{repo}/resolve/main/text_encoder_2/model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/text_encoder_2/model.safetensors",
+            }
+          - {
+              src_url: "https://huggingface.co/{repo}/resolve/main/unet/diffusion_pytorch_model.fp16.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/unet/diffusion_pytorch_model.fp16.safetensors",
+            }
+          - {
+              src_url: "https://huggingface.co/{repo}/resolve/main/unet/diffusion_pytorch_model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/unet/diffusion_pytorch_model.safetensors",
+            }
+          - {
+              src_url: "https://huggingface.co/{repo}/resolve/main/vae/diffusion_pytorch_model.fp16.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/vae/diffusion_pytorch_model.fp16.safetensors",
+            }
+          - {
+              src_url: "https://huggingface.co/{repo}/resolve/main/vae/diffusion_pytorch_model.safetensors",
+              dst_oss_url: "oss://oneflow-static/hf_hub/{model}/vae/diffusion_pytorch_model.safetensors",
             }
     steps:
       - name: Maximize build space
