@@ -26,7 +26,7 @@ model = "juggernautXL_version6Rundiffusion"
 repo = "frankjoshua/juggernautXL_version6Rundiffusion"
 repo_path = f"/Users/tsai/Downloads/{model}"
 repo = Repo(repo_path)
-dl_base_url = "https://huggingface.co/{repo}/resolve/main/"
+dl_base_url = f"https://huggingface.co/{repo}/resolve/main/"
 aliyun_base_url = "oss://oneflow-static/hf_hub/{model}"
 
 # Get the list of all tracked files
